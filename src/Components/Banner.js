@@ -1,14 +1,12 @@
-import React from 'react';
 import styled from 'styled-components';
-import bannerImg from '../images/banner.png';
+import imgBanner from '../images/banner.png';
 
-const BannerContainer = styled.div`
+export const Banner = styled.div`
     max-width: 1060px;
+    height: 208px;
     margin: 0 auto;
+    background-image: url(${imgBanner});
+    background-zie: cover;
+    background-position: center;
+    background-color: #ccc;
 ` ;
-
-export const Banner = () => (
-    <BannerContainer>
-        <img src={bannerImg} alt="баннер"/>
-    </BannerContainer>
-)
