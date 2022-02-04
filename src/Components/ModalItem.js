@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ButtonCheckout } from './ButtonCheckout';
 
 const Overlay = styled.div`
     position: fixed;
@@ -32,7 +33,7 @@ const Banner = styled.div`
     margin-bottom: 20px;
 `;
 
-const Wrapper = styled.div`
+const Content = styled.section`
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -40,23 +41,13 @@ const Wrapper = styled.div`
     padding-bottom: 43px;
 `;
 
-const Info = styled.div`
-    font-family: 'Pacifico', sans-serif;
+const HeaderContent = styled.div`
+    font-family: 'Pacifico', cursive;
     font-size: 30px;
     display: flex;
     justify-content: space-between;
     padding 0 40px;
 `;
-
-const Button = styled.button`
-    width: 250px;
-    height: 65px;
-    background-color: #299B01;
-    border-color: transparent;
-    color: white;
-    font-size: 21px;
-    align-self: center;
-`
 
 export const ModalItem = ({ openItem, setOpenItem }) => {
 
@@ -71,16 +62,16 @@ export const ModalItem = ({ openItem, setOpenItem }) => {
         <Overlay id="overlay" onClick={closeModal}>
             <Modal>
                 <Banner img={openItem.img}/>
-                <Wrapper>
-                    <Info>
-                        <p>{openItem.name}</p>
-                        <p>{openItem.price.toLocaleString('ru-RU',
-                        {style: 'currency', currency: 'RUB'})}</p>
-                    </Info>
-                    <Button>
+                <Content>
+                    <HeaderContent>
+                        <div>{openItem.name}</div>
+                        <div>{openItem.price.toLocaleString('ru-RU',
+                        {style: 'currency', currency: 'RUB'})}</div>
+                    </HeaderContent>
+                    <ButtonCheckout>
                         Добавить
-                    </Button>
-                </Wrapper>
+                    </ButtonCheckout>
+                </Content>
             </Modal>
         </Overlay>
     )
