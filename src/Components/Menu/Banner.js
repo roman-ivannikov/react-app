@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import imgBanner from '../images/banner.png';
+import imgBanner from '../../images/banner.png';
 
 export const Banner = styled.div`
     max-width: 1060px;
