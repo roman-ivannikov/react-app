@@ -31,11 +31,23 @@ const TrashButton = styled.button`
     cursor: pointer;
 `;
 
-export const OrderListItem = ({ order }) => (
-    <OrderItemStyled key={order.id}>
-        <ItemName>{order.name}</ItemName>
-        <span>{order.count}</span>
-        <ItemPrice>{formatCurrency(totalPriceItems(order))}</ItemPrice>
-        <TrashButton/>
-    </OrderItemStyled>
-);
+const ToppingsList = styled.span`
+    font-size: small;
+`;
+
+export const OrderListItem = ({ order }) => {
+
+    const checkedToppings = order.topping ? order.topping.filter((item) => item.checked).map((item) => item.name).join('; ') : '';
+
+    return (
+        <OrderItemStyled>
+            <ItemName>
+                {order.name}
+                {checkedToppings && <ToppingsList><br/>{checkedToppings}</ToppingsList>}
+            </ItemName>
+            <span>{order.count}</span>
+            <ItemPrice>{formatCurrency(totalPriceItems(order))}</ItemPrice>
+            <TrashButton/>
+        </OrderItemStyled>
+    );
+}
