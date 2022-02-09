@@ -1,24 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import { InputChoice } from "../Style/InputChoice";
 
-const ToppingWrap = styled.div`
-    max-width: 500px;
-    margin: 0 auto;
-    column-count: 2;
-    column-gap: 15px;
-`;
-
-const ToppingLabel = styled.label`
-    cursor: pointer;
-    display: block;
-`;
-
-
-const ToppingCheckbox = styled.input`
-    cursor: pointer;
-    margin-right: 5px;
-`;
-
+const [ToppingWrap, ToppingLabel, ToppingCheckbox] = InputChoice();
 
 export function Toppings({ toppings, checkToppings }) {
     return (
