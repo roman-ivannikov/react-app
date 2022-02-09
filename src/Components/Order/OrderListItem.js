@@ -38,7 +38,7 @@ const ToppingsList = styled.span`
 export const OrderListItem = ({ order }) => {
 
     const checkedToppings = order.topping ? order.topping.filter((item) => item.checked).map((item) => item.name).join('; ') : '';
-
+    
     return (
         <OrderItemStyled>
             <ItemName>
