@@ -5,19 +5,41 @@ import { totalPriceItems, formatCurrency } from '../Functions/secondaryFunction'
 
 const OrderItemStyled = styled.li`
     display: flex;
-    flex-wrap: wrap;
     margin: 15px 0;
 `;
 
+const ItemWrapper = styled.div`
+    display: flex;
+    width: calc(100% - 30px);
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    & > span {
+        flex-grow: 1;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+`;
+
 const ItemName = styled.span`
-    flex-grow: 1;
+    flex-basis: 60%;
+    max-width: 60%;
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
+const ItemCount = styled.span`
+    flex-basis: 8%;
+    max-width: 8%;
+    font-size: .9em;
 `;
 
 const ItemPrice = styled.span`
-    margin-left: 20px;
-    margin-right: 10px;
-    min-width: 65px;
+    flex-basis: 32%;
+    max-width: 32%;
     text-align: right;
+    padding-left: 5px;
 `;
 
 const TrashButton = styled.button`
@@ -30,6 +52,7 @@ const TrashButton = styled.button`
     background-size: cover;
     background-repeat: no-repeat;
     cursor: pointer;
+    margin-left: auto;
 `;
 
 const ToppingsList = styled.div`
@@ -38,30 +61,25 @@ const ToppingsList = styled.div`
     width: 100%;
 `;
 
-export const OrderListItem = ({ order, orders, setOrders }) => {
+export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
 
     const topping = order.topping ? order.topping.filter(item => item.checked)
         .map(item => item.name)
         .join(', ') : '';
     
-    const delFromOrder = () => {
-        const key = orders.indexOf(order);
-        if (key !== -1) {
-            setOrders(orders.filter( (item, index) => index !== key));
-        }
-    };
-
     return (
         <OrderItemStyled>
-            <ItemName>
-                {order.name} {order.choice}
-            </ItemName>
-            <span>{order.count}</span>
-            <ItemPrice>{formatCurrency(totalPriceItems(order))}</ItemPrice>
+            <ItemWrapper>
+                <ItemName onClick={()=>setOpenItem({...order, index})}>
+                    {order.name} {order.choice}
+                </ItemName>
+                <ItemCount>{order.count}</ItemCount>
+                <ItemPrice>{formatCurrency(totalPriceItems(order))}</ItemPrice>
+                {topping && <ToppingsList>Допы: {topping}</ToppingsList>}
+            </ItemWrapper>
             <TrashButton
-                onClick={delFromOrder}
+                onClick={()=>deleteItem(index)}
             />
-            {topping && <ToppingsList>Допы: {topping}</ToppingsList>}
         </OrderItemStyled>
     );
 }
