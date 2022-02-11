@@ -24,6 +24,11 @@ export const GlobalStyle = createGlobalStyle`
     height: auto;
   }
 
+  figure {
+    margin: 0;
+    padding: 0;
+  }
+
   a {
     text-decoration: none;
     color: inherit;

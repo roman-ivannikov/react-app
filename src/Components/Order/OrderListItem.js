@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef } from 'react';
 import styled from 'styled-components';
 import trashImage from '../../images/trash.svg';
 import { totalPriceItems, formatCurrency } from '../Functions/secondaryFunction';
@@ -67,6 +67,8 @@ export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
         .map(item => item.name)
         .join(', ') : '';
     
+    const refDeleteButton = useRef(null);
+
     return (
         <OrderItemStyled>
             <ItemWrapper>
@@ -78,6 +80,7 @@ export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
                 {topping && <ToppingsList>Допы: {topping}</ToppingsList>}
             </ItemWrapper>
             <TrashButton
+                ref={refDeleteButton}
                 onClick={()=>deleteItem(index)}
             />
         </OrderItemStyled>

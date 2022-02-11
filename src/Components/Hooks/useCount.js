@@ -1,11 +1,7 @@
 import { useState } from "react";
 
-export function useCount(openItem) {
-
-    const readyCount = openItem.count ? openItem.count : 1;
-
-    const [count, setCount] = useState(readyCount);
-
+export function useCount(startCount = 1) {
+    const [count, setCount] = useState(startCount);
     const onChange = e => setCount(e.target.value);
 
     return { count, setCount, onChange }
