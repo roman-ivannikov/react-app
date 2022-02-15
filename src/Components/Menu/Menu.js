@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import dbMenu from '../DBMenu';
 import { ListItem } from './ListItem';
 import { Banner } from './Banner';
+import { useFetch } from '../Hooks/useFetch';
+import { Preloader } from './Preloader';
 
 const MenuStyled = styled.main`
     background-color: #ccc;
@@ -14,22 +15,51 @@ const SectionMenu = styled.section`
     padding: 30px;
 `
 
-export const Menu = ({ setOpenItem }) => (
-    <MenuStyled>
+const SectionPreloader = styled.div`
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+`;
+
+export const Menu = ({ setOpenItem }) => {
+
+     const res = useFetch();
+     const dbMenu = res.response;
+
+    return (
+        <MenuStyled>
         <Banner/>
-        <SectionMenu>
-            <h2>Бургеры</h2>
-            <ListItem 
-                itemList={dbMenu.burger}
-                setOpenItem={setOpenItem}
-            />
-        </SectionMenu>
-        <SectionMenu>
-            <h2>Закуски / Напитки</h2>
-            <ListItem 
-                itemList={dbMenu.other}
-                setOpenItem={setOpenItem}
-            />
-        </SectionMenu>
+        { res.response ?
+        <>
+            <SectionMenu>
+                <h2>Бургеры</h2>
+                <ListItem 
+                    itemList={dbMenu.burger}
+                    setOpenItem={setOpenItem}
+                />
+            </SectionMenu>
+            <SectionMenu>
+                <h2>Закуски / Напитки</h2>
+                <ListItem 
+                    itemList={dbMenu.other}
+                    setOpenItem={setOpenItem}
+                />
+            </SectionMenu>
+        </> : 
+        <SectionPreloader>
+            {
+            res.error ?
+            <div>Извините, произошла непредвиденная ошибка...</div> :
+            <>
+                <span>Получение данных с сервера, ждите...</span>
+                <Preloader />
+            </>
+            }
+        </SectionPreloader>
+        }
     </MenuStyled>
-)
+    )
+};

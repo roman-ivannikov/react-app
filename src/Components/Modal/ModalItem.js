@@ -61,7 +61,7 @@ const TotalPriceItem = styled.div`
     justify-content: space-between;
 `;
 
-export const ModalItem = ({ openItem, setOpenItem, orders, setOrders, title, setTitle }) => {
+export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
     const counter = useCount(openItem.count);
     const toppings = useToppings(openItem);

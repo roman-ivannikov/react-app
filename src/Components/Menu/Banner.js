@@ -6,7 +6,7 @@ export const Banner = styled.div`
     height: 208px;
     margin: 0 auto;
     background-image: url(${imgBanner});
-    background-zie: cover;
+    background-size: cover;
     background-position: center;
     background-color: #ccc;
 ` ;

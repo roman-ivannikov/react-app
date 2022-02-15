@@ -30,7 +30,7 @@ function App() {
   const openItem = useOpenItem();
   const orders = useOrders();
 
-  useTitle();
+  useTitle(openItem.openItem);
 
   return (
     <>
