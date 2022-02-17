@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { InputChoice } from "../Style/InputChoice";
+import { Context, ContextItem } from "../Functions/context";
 
 const [ChoiceWrap, ChoiceLabel, ChoiceRadio] = InputChoice();
 
-export function Choices({ openItem, choice, changeChoices }) {
+export function Choices() {
+
+    const { choices: { choice, changeChoices } } = useContext(ContextItem);
+    const { openItem: { openItem } } = useContext(Context);
+
     return (
         <>
             <h3>Выбирайте:</h3>
